@@ -1,1 +1,2 @@
 hostname
+java -version
