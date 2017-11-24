@@ -1,5 +1,5 @@
 # jenkins
-#refer this
+#refer this for ubuntu docket API activation
 https://www.virtuallyghetto.com/2014/07/quick-tip-how-to-enable-docker-remote-api.html
 
  ---> f741943c67b4
