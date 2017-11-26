@@ -1,6 +1,36 @@
 # jenkins
+
 #refer this for ubuntu docket API activation
+
 https://www.virtuallyghetto.com/2014/07/quick-tip-how-to-enable-docker-remote-api.html
+
+----------------
+# Docker API activation on Cent OS
+
+Did you follow the Docker install instructions from here: https://docs.docker.com/engine/installation/linux/centos/756 ?
+
+dockerd should be added to the standard /usr/bin path on CentOS 7. Check to see that it is there (ls /usr/bin/dockerd) - if it is, make sure your path settings are correct. If it's not, docker hasn't correctly installed and you might want to try again.
+
+Once you get that figured out, the command you list should expose the remote api. In CentOS 7, the init system is systemd, so you might want to create the following folder/file location with the desired docker exec command:
+
+/etc/systemd/system/docker.service.d/docker.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock
+
+Restart the docker service using systemd commands:
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+You can confirm that the exec took your override parameters by calling:
+
+ps -ef | grep docker
+Look for the dockerd process and confirm that your -H settings are listed.
+
+Now, you should be able to hook up to the api: >docker -H :2375 info
+
+
+--------------------
 
  ---> f741943c67b4
 Successfully built f741943c67b4
@@ -28,31 +58,23 @@ jenkins@ubuntu-vm-1404:/home/sujeetkp/Docker$ docker port apacheapp | cut -d ":"
 32769
 jenkins@ubuntu-vm-1404:/home/sujeetkp/Docker$ docker stop apacheapp
 
+---------------------------------------------------------------
 
-----------------
+#Docker Machine
 
+Docker Machine can be installed independently, but you need docker also to be installed in order to access the remote docker daemon/host once the docker machine is registered with the remote host using generic driver
 
-Did you follow the Docker install instructions from here: https://docs.docker.com/engine/installation/linux/centos/756 ?
+https://blog.dahanne.net/2015/10/07/adding-an-existing-docker-host-to-docker-machine-a-few-tips/
 
-dockerd should be added to the standard /usr/bin path on CentOS 7. Check to see that it is there (ls /usr/bin/dockerd) - if it is, make sure your path settings are correct. If it's not, docker hasn't correctly installed and you might want to try again.
-
-Once you get that figured out, the command you list should expose the remote api. In CentOS 7, the init system is systemd, so you might want to create the following folder/file location with the desired docker exec command:
-
-/etc/systemd/system/docker.service.d/docker.conf
-[Service]
-ExecStart=
-ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock
-
-Restart the docker service using systemd commands:
-
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-You can confirm that the exec took your override parameters by calling:
-
-ps -ef | grep docker
-Look for the dockerd process and confirm that your -H settings are listed.
-
-Now, you should be able to hook up to the api: >docker -H :2375 info
+docker-machine create --driver generic \
+ --generic-ip-address 10.142.0.2 \
+ --generic-ssh-user root \
+ 10.142.0.2
+ 
+ docker-machine regenerate-certs 10.142.0.2 #Regenerate the Certificate
+ 
+ docker-machine ls
+ 
+ docker-machine rm  10.142.0.2
 
 
---------------------
