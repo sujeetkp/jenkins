@@ -84,7 +84,6 @@ export DOCKER_TLS_VERIFY="1"
 export DOCKER_HOST="tcp://10.142.0.2:2376"
 export DOCKER_CERT_PATH="/root/.docker/machine/machines/10.142.0.2"
 export DOCKER_MACHINE_NAME="10.142.0.2"
-# Run this command to configure your shell:
-# eval $(docker-machine env 10.142.0.2)
+
 root@instance-1:~# eval "$(docker-machine env 10.142.0.2)"
 
