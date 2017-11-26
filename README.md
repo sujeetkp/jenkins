@@ -69,21 +69,24 @@ https://blog.dahanne.net/2015/10/07/adding-an-existing-docker-host-to-docker-mac
 docker-machine create --driver generic \
  --generic-ip-address 10.142.0.2 \
  --generic-ssh-user root \
- 10.142.0.2
+ ubuntu-Docker
  
- docker-machine regenerate-certs 10.142.0.2 #Regenerate the Certificate
+ docker-machine regenerate-certs ubuntu-Docker #Regenerate the Certificate
  
  docker-machine ls
  
- docker-machine rm  10.142.0.2
+ docker-machine rm  ubuntu-Docker
 
 To access the host, you need to export some enviroment variables
 
-root@instance-1:~# docker-machine env 10.142.0.2
+root@instance-1:~# docker-machine env ubuntu-Docker
 export DOCKER_TLS_VERIFY="1"
 export DOCKER_HOST="tcp://10.142.0.2:2376"
 export DOCKER_CERT_PATH="/root/.docker/machine/machines/10.142.0.2"
 export DOCKER_MACHINE_NAME="10.142.0.2"
 
-root@instance-1:~# eval "$(docker-machine env 10.142.0.2)"
+root@instance-1:~# eval "$(docker-machine env ubuntu-Docker)"
 
+[root@docker-2 ~]# docker-machine ls
+NAME            ACTIVE   DRIVER    STATE     URL                     SWARM   DOCKER          ERRORS
+ubuntu-Docker   -        generic   Running   tcp://10.142.0.2:2376           v17.06.2-ee-5
