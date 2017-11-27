@@ -100,3 +100,11 @@ root@instance-1:~# eval "$(docker-machine env ubuntu-Docker)"
 [root@docker-2 ~]# docker-machine ls
 NAME            ACTIVE   DRIVER    STATE     URL                     SWARM   DOCKER          ERRORS
 ubuntu-Docker   -        generic   Running   tcp://10.142.0.2:2376           v17.06.2-ee-5
+
+Access Docker Host/Daemon of a remote host
+------------------------------------------
+
+1. You need to install docker client on the local host.
+2. Then update the Environment Variable DOCKER_HOST with the connection string of the remote daemon/host
+   export DOCKER_HOST="tcp://10.142.0.2:2376"
+3. Then Execute the docker commands, and docker will connect to the remote daemon instead of the local.
