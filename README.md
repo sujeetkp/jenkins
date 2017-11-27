@@ -1,3 +1,11 @@
+My Current Environment
+----------------------
+
+ubuntu-vm-1404 --> It has docker installed and port 2376 is exposed with https protocol and TLS Certificate.
+Docker2 (Cent OS) --> It has Docker installed and exposed at 4243 port http protocol.
+                      It also has docker-machine configured, which controls the docker host installed on ubuntu-vm-1404 on port 2376.
+instance-1 --. It has jenkis installed and exposed at port 8080. Also it has git client installed.
+
 # jenkins
 
 #refer this for ubuntu docket API activation
