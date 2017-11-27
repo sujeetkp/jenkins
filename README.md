@@ -4,6 +4,8 @@
 
 https://www.virtuallyghetto.com/2014/07/quick-tip-how-to-enable-docker-remote-api.html
 
+/etc/default/docker is another file where we can update the tcp port.
+
 ----------------
 # Docker API activation on Cent OS
 
