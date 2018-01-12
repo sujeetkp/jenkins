@@ -7,7 +7,7 @@ pipeline {
             steps { 
                sh 'echo Build'
                sh 'hostname'
-               readFile('Dockerfile')
+               sh 'cat Dockerfile'
             }
         }
         stage('Test'){
